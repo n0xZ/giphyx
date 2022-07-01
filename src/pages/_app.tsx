@@ -1,6 +1,7 @@
 import { withTRPC } from '@trpc/next'
 import { AnimatePresence } from 'framer-motion'
 import { AppType } from 'next/dist/shared/lib/utils'
+import type { AppRouter } from '~/backend/routers/_app'
 import '../styles/app.css'
 const MyApp: AppType = ({ Component, pageProps }) => {
 	return (
@@ -10,7 +11,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 	)
 }
 
-export default withTRPC({
+export default withTRPC<AppRouter>({
 	config({ ctx }) {
 		/**
 		 * If you want to use SSR, you need to use the server's full URL
