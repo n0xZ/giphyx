@@ -1,10 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { useQuery } from 'react-query'
 import { FetchError } from '~/components/error/FetchError'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
 import { Loading } from '~/components/loading/Loading'
-import { getSearchResultsByQuery } from '~/services/api'
 import { trpc } from '~/utils/trpc'
 import { SearchResultsI } from '~/types'
 
