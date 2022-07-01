@@ -1,21 +1,22 @@
 import { FC, ReactNode } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
-import { NavLink, useLocation } from 'react-router-dom'
 interface Props {
 	children: ReactNode
 }
 export const MainLayout: FC<Props> = ({ children }) => {
-	const { pathname } = useLocation()
+	const { pathname } = useRouter()
 	return (
 		<>
 			<header className="p-5 border-b-2 border-gray-200">
 				<nav className="flex flex-row items-center justify-center container mx-auto">
 					<ul className="flex flex-row items-center space-x-9 font-bold">
 						<li>
-							<NavLink to="/">Home</NavLink>
+							<Link href="/">Home</Link>
 						</li>
 						<li>
-							<NavLink to="/search">Buscar GIFS</NavLink>
+							<Link href="/search">Buscar GIFS</Link>
 						</li>
 					</ul>
 				</nav>

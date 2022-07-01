@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import Categorieslist from '~/components/category/CategoriesList'
 import { FetchError } from '~/components/error/FetchError'
 import { MainLayout } from '~/components/layout'
@@ -6,15 +6,12 @@ import { Loading } from '~/components/loading/Loading'
 import { getCategories } from '~/services/api'
 import { Category } from '~/types'
 
-const SearchGifByCategory = () => {
-	const { data, isLoading, isError, error } = useQuery<Category, Error>(
-		'get-categories',
-		getCategories
-	)
-	if (isLoading) return <Loading />
-	if (isError) return <FetchError error={error} />
+const CategoriesPage: NextPage = ({
+	data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<MainLayout>
+			{' '}
 			<h2 className="text-center text-3xl font-bold mt-5 mb-3">
 				Buscar gifs por categoría
 			</h2>
@@ -23,4 +20,13 @@ const SearchGifByCategory = () => {
 	)
 }
 
-export default SearchGifByCategory
+export default CategoriesPage
+
+export const getStaticProps: GetStaticProps = async () => {
+	const data = await getCategories()
+	return {
+		props: {
+			data,
+		},
+	}
+}

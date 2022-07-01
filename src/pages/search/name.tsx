@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import { useQuery } from 'react-query'
 import { FetchError } from '~/components/error/FetchError'
 import { GifList } from '~/components/gif/GifList'
@@ -31,10 +31,14 @@ const SearchGifByName = () => {
 		const { target } = e
 		setSearchQuery(target.value)
 	}
+
+	// 'handleSubmit' Triggers the refetch function, that will search gifs based on 'searchQuery' state.
+
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		refetch()
 	}
+
 	const { data, isError, isFetching, refetch, error } = useQuery<
 		SearchResultsI,
 		Error

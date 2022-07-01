@@ -7,6 +7,7 @@ interface Props {
 }
 
 const Categorieslist: FC<Props> = ({ categories }) => {
+	//This component renders the category's response
 	return (
 		<section className="grid xl:grid-cols-3 grid-cols-1 xl:gap-6 gap-3 container mx-auto">
 			{categories.map((category, index) => (
