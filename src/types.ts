@@ -5,7 +5,10 @@ export interface Category {
 	pagination: Pagination
 	meta: Meta
 }
-
+export interface SearchResultsI {
+	data: GIF[]
+	meta: Meta
+}
 export interface Data {
 	name: string
 	name_encoded: string
