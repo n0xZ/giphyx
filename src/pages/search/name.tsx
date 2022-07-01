@@ -5,6 +5,7 @@ import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
 import { Loading } from '~/components/loading/Loading'
 import { getSearchResultsByQuery } from '~/services/api'
+import { trpc } from '~/utils/trpc'
 import { SearchResultsI } from '~/types'
 
 const FetchResults = ({
@@ -12,20 +13,28 @@ const FetchResults = ({
 	error,
 	isError,
 	isFetching,
+	isLoading,
 }: {
+	isLoading: boolean
 	isError: boolean
-	error: Error | null
+	error: string | undefined
 	isFetching: boolean
-	data: SearchResultsI
+	data: SearchResultsI | undefined
 }) => {
-	if (isFetching) return <Loading />
+	if (isFetching || isLoading) return <Loading />
 	if (isError) return <FetchError error={error!} />
-	if (data.data!.length === 0) return <p>No se ha encontrado nada</p>
-	return <GifList gifs={data?.data!} />
+	if (!data?.result && !isLoading) return <div>No se ha encontrado nada.</div>
+	return <GifList gifs={data?.result.data.data!} />
 }
 
 const SearchGifByName = () => {
 	const [searchQuery, setSearchQuery] = useState('')
+	const [hasSubmitted, setHasSubmitted] = useState(false)
+
+	const { data, isError, isFetching, isLoading, refetch, error } =
+		trpc.useQuery(['gifs.gif-search-results', searchQuery], {
+		refetchInterval:2000
+		})
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { target } = e
@@ -36,13 +45,8 @@ const SearchGifByName = () => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		refetch()
+		setHasSubmitted(prev=>!prev)
 	}
-
-	const { data, isError, isFetching, refetch, error } = useQuery<
-		SearchResultsI,
-		Error
-	>('search-results', () => getSearchResultsByQuery(searchQuery))
 
 	return (
 		<MainLayout>
@@ -62,13 +66,15 @@ const SearchGifByName = () => {
 					Buscar
 				</button>
 			</form>
-
-			<FetchResults
-				data={data!}
-				error={error}
-				isError={isError}
-				isFetching={isFetching}
-			/>
+			{searchQuery.length > 3 && (
+				<FetchResults
+					data={data}
+					error={error?.message}
+					isError={isError}
+					isFetching={isFetching}
+					isLoading={isLoading}
+				/>
+			)}
 		</MainLayout>
 	)
 }

@@ -1,0 +1,9 @@
+import { createRouter } from '../router'
+import { categoriesRouter } from './categories'
+import { gifsRouter } from './gifs'
+
+export const appRouter = createRouter()
+	.merge('categories.', categoriesRouter)
+	.merge('gifs.', gifsRouter)
+
+export type AppRouter = typeof appRouter
