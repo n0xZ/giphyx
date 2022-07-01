@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import {ReactQueryDevtools} from 'react-query/devtools'
 import { AnimatePresence } from 'framer-motion'
 import App from './App'
 import 'uno.css'
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 					<App />
 				</AnimatePresence>
 			</BrowserRouter>
+			<ReactQueryDevtools initialIsOpen />
 		</QueryClientProvider>
 	</React.StrictMode>
 )
