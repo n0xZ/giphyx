@@ -2,7 +2,7 @@ import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import { createSSGHelpers } from '@trpc/react/ssg'
 import Categorieslist from '~/components/category/CategoriesList'
 import { MainLayout } from '~/components/layout'
-import { getCategories } from '~/services/api'
+
 
 import { trpc } from '~/utils/trpc'
 import { appRouter } from '~/backend/routers/_app'
