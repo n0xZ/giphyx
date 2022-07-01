@@ -8,7 +8,7 @@ const CategoryItem: FC<Props> = ({ category }) => {
 	return (
 		<Link
 			to={`/search/results/${category.name}`}
-			className=" w-full rounded-xl shadow-xl "
+			className=" w-full rounded-xl shadow-xl hover:opacity-90 ease-in-out duration-150"
 		>
 			<aside className="grid place-items-center ">
 				<h3 className="text-center font-bold text-2xl">{category.name}</h3>
