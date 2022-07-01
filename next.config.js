@@ -2,6 +2,15 @@
 module.exports = {
 	reactStrictMode: true,
 	env: {
-		API_URL: process.env.NEXT_APP_API_URL,
+		GIPHY_API_KEY: process.env.GIPHY_API_KEY,
+		GIPHY_API_URL: process.env.GIPHY_API_URL,
+	},
+	images: {
+		domains: [
+			'media3.giphy.com',
+			'media0.giphy.com',
+			'media2.giphy.com',
+			'media1.giphy.com',
+		],
 	},
 }
