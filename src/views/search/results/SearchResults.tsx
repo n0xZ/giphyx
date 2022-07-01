@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { FetchError } from '~/components/error/FetchError'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
@@ -9,7 +9,7 @@ import { SearchResultsI } from '~/types'
 const SearchResults = () => {
 	const params = useParams()
 	const { data, isLoading, isError, error } = useQuery<SearchResultsI, Error>(
-		'get-gif-based-on-query',
+		'gif-based-on-query',
 		() => getSearchResultsByQuery(params.query!)
 	)
 	if (isLoading) return <Loading />
