@@ -10,12 +10,12 @@ import '@unocss/reset/tailwind.css'
 const client = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<AnimatePresence exitBeforeEnter>
-				<QueryClientProvider client={client}>
+		<QueryClientProvider client={client}>
+			<BrowserRouter>
+				<AnimatePresence exitBeforeEnter>
 					<App />
-				</QueryClientProvider>
-			</AnimatePresence>
-		</BrowserRouter>
+				</AnimatePresence>
+			</BrowserRouter>
+		</QueryClientProvider>
 	</React.StrictMode>
 )
