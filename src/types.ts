@@ -6,8 +6,14 @@ export interface Category {
 	meta: Meta
 }
 export interface SearchResultsI {
-	data: GIF[]
-	meta: Meta
+	id: null
+	result: {
+		data: {
+			data: GIF[]
+			meta: Meta
+		}
+		type: 'data'
+	}
 }
 export interface Data {
 	name: string
