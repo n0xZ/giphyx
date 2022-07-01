@@ -10,7 +10,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
 		<>
 			<header className="p-5 border-b-2 border-gray-200">
 				<nav className="flex flex-row items-center justify-center container mx-auto">
-					<ul className="flex flex-row items-center space-x-9">
+					<ul className="flex flex-row items-center space-x-9 font-bold">
 						<li>
 							<NavLink to="/">Home</NavLink>
 						</li>
