@@ -6,15 +6,11 @@ export interface Category {
 	meta: Meta
 }
 export interface SearchResultsI {
-	id: null
-	result: {
-		data: {
-			data: GIF[]
-			meta: Meta
-		}
-		type: 'data'
-	}
+	data: GIF[]
+	pagination: Pagination
+	meta: Meta
 }
+
 export interface Data {
 	name: string
 	name_encoded: string

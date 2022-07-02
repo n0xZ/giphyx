@@ -21,8 +21,8 @@ const FetchResults = ({
 }) => {
 	if (isFetching || isLoading) return <Loading />
 	if (isError) return <FetchError error={error!} />
-	if (!data?.result && !isLoading) return <div>No se ha encontrado nada.</div>
-	return <GifList gifs={data?.result.data.data!} />
+	if (!data?.data && !isLoading) return <div>No se ha encontrado nada.</div>
+	return <GifList gifs={data?.data!} />
 }
 
 const SearchGifByName = () => {
@@ -30,8 +30,8 @@ const SearchGifByName = () => {
 	const [hasSubmitted, setHasSubmitted] = useState(false)
 
 	const { data, isError, isFetching, isLoading, refetch, error } =
-		trpc.useQuery(['gifs.gif-search-results', searchQuery], {
-		refetchInterval:2000
+		trpc.useQuery(['gifs.gif-search-results', { query: searchQuery }], {
+			refetchInterval: 2000,
 		})
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const SearchGifByName = () => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		setHasSubmitted(prev=>!prev)
+		setHasSubmitted((prev) => !prev)
 	}
 
 	return (

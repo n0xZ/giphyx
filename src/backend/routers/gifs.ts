@@ -13,11 +13,10 @@ export const gifsRouter = createRouter()
 		},
 	})
 	.query('gif-search-results', {
-		input: z.string(),
+		input: z.object({ query: z.string() }),
 		async resolve({ input }) {
-			console.log(input)
 			const response = await fetch(
-				`${API_URL}/search?api_key=${API_KEY}&q=${input}&limit=25&offset=0&rating=g&lang=en`
+				`${API_URL}/search?api_key=${API_KEY}&q=${input.query}&limit=25&offset=0&rating=g&lang=en`
 			)
 			const data: SearchResultsI = await response.json()
 			return data
