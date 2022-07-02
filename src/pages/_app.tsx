@@ -1,5 +1,6 @@
 import { withTRPC } from '@trpc/next'
 import { AnimatePresence } from 'framer-motion'
+import superjson from 'superjson'
 import { AppType } from 'next/dist/shared/lib/utils'
 import type { AppRouter } from '~/backend/routers/_app'
 import '../styles/app.css'
@@ -26,11 +27,21 @@ export default withTRPC<AppRouter>({
 			/**
 			 * @link https://react-query.tanstack.com/reference/QueryClient
 			 */
-			// queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+			queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+			headers() {
+				if (ctx?.req) {
+					return {
+						...ctx.req.headers,
+						'x-ssr': '1',
+					}
+				}
+				return {}
+			},
+			transformer:superjson
 		}
 	},
 	/**
 	 * @link https://trpc.io/docs/ssr
 	 */
-	ssr: true,
+	ssr: false,
 })(MyApp)
