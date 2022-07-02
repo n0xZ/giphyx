@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 	return {
 		paths: categories.map(({ name_encoded }) => ({
-			params: { name_encoded },
+			params: { name:name_encoded },
 		})),
 		fallback: 'blocking',
 	}
