@@ -30,7 +30,7 @@ const SearchGifByName = () => {
 	const [hasSubmitted, setHasSubmitted] = useState(false)
 
 	const { data, isError, isFetching, isLoading, refetch, error } =
-		trpc.useQuery(['gifs.gif-search-results', { query: searchQuery }], {
+		trpc.useQuery(['gifs.getGIFByResults', { query: searchQuery }], {
 			refetchInterval: 2000,
 		})
 
@@ -48,14 +48,14 @@ const SearchGifByName = () => {
 
 	return (
 		<MainLayout>
-			<h2 className="text-center text-3xl mb-5">Buscar Gif por nombre</h2>
+			<h2 className="mb-5 text-3xl text-center">Buscar Gif por nombre</h2>
 			<form
 				onSubmit={handleSubmit}
 				className="flex flex-row items-center justify-center space-x-5"
 			>
 				<input
 					placeholder="Por ej... Anime"
-					className="rounded-xl px-2 py-2 border-2 border-gray-500"
+					className="px-2 py-2 border-2 border-gray-500 rounded-xl"
 					type="text"
 					value={searchQuery}
 					onChange={handleChange}

@@ -3,33 +3,23 @@ import { createSSGHelpers } from '@trpc/react/ssg'
 import Categorieslist from '~/components/category/CategoriesList'
 import { MainLayout } from '~/components/layout'
 
-
 import { trpc } from '~/utils/trpc'
 import { appRouter } from '~/backend/routers/_app'
-const CategoriesPage: NextPage = ({
-	categories,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+import { Loading } from '~/components/loading/Loading'
+const CategoriesPage: NextPage = () => {
+	const { data: categories, isLoading } = trpc.useQuery(['cat.getCategories'])
+
+	if (isLoading) return <Loading />
 	if (!categories) return <div>Hubo un error al cargar las categorías.</div>
 	return (
 		<MainLayout>
 			{' '}
-			<h2 className="text-center text-3xl font-bold mt-5 mb-3">
+			<h2 className="mt-5 mb-3 text-3xl font-bold text-center">
 				Buscar gifs por categoría
 			</h2>
-			<Categorieslist categories={categories} />
+			<Categorieslist categories={categories.data!} />
 		</MainLayout>
 	)
 }
 
 export default CategoriesPage
-
-export const getStaticProps: GetStaticProps = async () => {
-	const ssg = createSSGHelpers({ ctx: {}, router: appRouter })
-	const data = await ssg.fetchQuery('categories.categories')
-
-	return {
-		props: {
-			categories: data.data,
-		},
-	}
-}
