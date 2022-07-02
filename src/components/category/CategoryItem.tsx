@@ -8,11 +8,11 @@ interface Props {
 const CategoryItem: FC<Props> = ({ category }) => {
 	return (
 		<Link
-			href={`/search/results/${category.name}`}
-			className=" w-full rounded-xl shadow-xl hover:opacity-90 ease-in-out duration-150"
+			href={`/results/${category.name_encoded}`}
+			className="w-full duration-150 ease-in-out shadow-xl  rounded-xl hover:opacity-90"
 		>
 			<aside className="grid place-items-center ">
-				<h3 className="text-center font-bold text-2xl">{category.name}</h3>
+				<h3 className="text-2xl font-bold text-center">{category.name}</h3>
 				<Image
 					src={category.gif.images['480w_still'].url}
 					className="object-cover"
