@@ -1,21 +1,27 @@
-import { FC } from 'react'
-import Image from 'next/image'
+import { FC, useState } from 'react'
+import Image from 'next/future/image'
 import { GIF } from '~/types'
 
 interface Props {
 	gif: GIF
 }
 export const GifItem: FC<Props> = ({ gif }) => {
+	const [src, setSrc] = useState(gif.images.downsized.url)
+	const handleFallbackSRC = () => {
+		setSrc(gif.images.original.url)
+	}
 	return (
-		<aside>
-			<h3 className="text-center font-bold text-2xl">{gif.title}</h3>
+		<article className="flex flex-col justify-center ">
 			<Image
-				src={gif.images.downsized.url}
-				className="object-cover"
+				src={src}
+				className="rounded-xl w-full bg-gradient-to-r p-[2px] from-[#7928ca] to-[#ff0080]"
+				placeholder="blur"
+				blurDataURL={gif.images.downsized.url}
 				width={gif.images.downsized.width}
+				onError={() => handleFallbackSRC()}
 				height={gif.images.downsized.height}
 				alt={gif.title}
 			/>
-		</aside>
+		</article>
 	)
 }
