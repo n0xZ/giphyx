@@ -14,7 +14,7 @@ export default function Document() {
 					rel="stylesheet"
 				/>
 			</Head>
-			<body className='font-inter bg-gray-50'>
+			<body className='text-gray-100 bg-black font-inter'>
 				<Main />
 				<NextScript />
 			</body>
