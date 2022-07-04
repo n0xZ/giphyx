@@ -16,4 +16,9 @@ module.exports = {
 			'media5.giphy.com',
 		],
 	},
+	experimental: {
+		images: {
+			allowFutureImage: true,
+		},
+	},
 }
