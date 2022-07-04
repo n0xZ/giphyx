@@ -16,7 +16,17 @@ export const gifsRouter = createRouter()
 		input: z.object({ query: z.string() }),
 		async resolve({ input }) {
 			const response = await fetch(
-				`${API_URL}/search?api_key=${API_KEY}&q=${input.query}&limit=5&offset=0&rating=g&lang=en`
+				`${API_URL}/search?api_key=${API_KEY}&q=${input.query}&limit=12&offset=0&rating=g&lang=en`
+			)
+			const data: SearchResultsI = await response.json()
+			return data
+		},
+	})
+	.query('getPaginatedGIFS', {
+		input: z.object({ query: z.string(), limit: z.number() }),
+		async resolve({ input: { limit, query } }) {
+			const response = await fetch(
+				`${API_URL}/search?api_key=${API_KEY}&q=${query}&limit=${limit}&offset=0&rating=g&lang=en`
 			)
 			const data: SearchResultsI = await response.json()
 			return data
