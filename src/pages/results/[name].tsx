@@ -3,7 +3,6 @@ import {
 	GetStaticPaths,
 	GetStaticPropsContext,
 	InferGetStaticPropsType,
-	NextPage,
 } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -11,26 +10,17 @@ import superjson from 'superjson'
 import { appRouter } from '~/backend/routers/_app'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
-import { Loading } from '~/components/loading/Loading'
 import { Category } from '~/types'
 
-import { trpc } from '~/utils/trpc'
-
-const SearchResults = (
-	props: InferGetStaticPropsType<typeof getStaticProps>
-) => {
-	const { query } = useRouter()
-	const { data: results, status } = trpc.useQuery([
-		'gifs.getGIFByResults',
-		{ query: props.nameParam },
-	])
-	if (status !== 'success') return <Loading />
+const SearchResults = ({
+	results,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<MainLayout>
 			<Head>
-				<title>Giphyx - Resultados de busqueda:{query.name}</title>
+				<title>Giphyx - Resultados de busqueda:</title>
 			</Head>
-			{results?.data && <GifList gifs={results?.data} />}
+			{results && <GifList gifs={results} />}
 		</MainLayout>
 	)
 }
@@ -61,11 +51,14 @@ export const getStaticProps = async (
 		router: appRouter,
 		transformer: superjson,
 	})
-	await ssg.prefetchQuery('gifs.getGIFByResults', { query: nameParam })
+	const { data: results } = await ssg.fetchQuery('gifs.getGIFByResults', {
+		query: nameParam,
+	})
+
 	return {
 		props: {
 			trpcState: ssg.dehydrate(),
-			nameParam,
+			results,
 		},
 		revalidate: 15,
 	}

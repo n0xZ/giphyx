@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, useRef } from 'react'
 import { FetchError } from '~/components/error/FetchError'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
@@ -11,15 +11,17 @@ const FetchResults = ({
 	error,
 	isError,
 	isFetching,
+	isStale,
 }: {
 	isError: boolean
+	isStale: boolean
 	error: string | undefined
 	isFetching: boolean
 	data: SearchResultsI | undefined
 }) => {
 	if (isFetching) return <Loading />
 	if (isError) return <FetchError error={error!} />
-	if (!data?.data) return <div>No se ha encontrado nada.</div>
+	if (!data?.data && isStale) return null
 	return <GifList gifs={data?.data!} />
 }
 
@@ -27,11 +29,13 @@ const SearchGifByName = () => {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [resultPages, setResultPages] = useState(12)
 	const [hasDisplayedResults, setHasDisplayedResults] = useState(false)
-	const { data, isError, isFetching, isRefetching, isLoading, refetch, error } =
+
+	const { data, isError, isFetching, isStale, refetch, error } =
 		trpc.useQuery(
 			['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
 			{
 				enabled: hasDisplayedResults,
+				refetchOnWindowFocus: false,
 			}
 		)
 
@@ -47,13 +51,15 @@ const SearchGifByName = () => {
 		refetch()
 		setResultPages((prev) => prev + 12)
 		setHasDisplayedResults(true)
+		setTimeout(() => setHasDisplayedResults(false), 1500)
 	}
 	const handlePagination = () => {
 		setResultPages((prev) => prev + 12)
 		refetch()
 	}
 	const handleResetResults = () => {
-		setHasDisplayedResults((prev) => !prev)
+		setHasDisplayedResults(false)
+		setSearchQuery('')
 	}
 	return (
 		<MainLayout>
@@ -64,11 +70,11 @@ const SearchGifByName = () => {
 			</h2>
 			<form
 				onSubmit={handleSubmit}
-				className="flex flex-row items-center justify-center space-x-5"
+				className="flex flex-col items-center justify-center p-3 space-x-5 space-y-3 xl:space-y-0 xl:flex-row"
 			>
 				<input
 					placeholder="Por ej... Anime"
-					className="px-2 py-2 text-gray-100 bg-transparent border-2 border-gray-500 rounded-xl"
+					className="w-48 px-2 py-2 text-gray-100 bg-transparent border-2 border-gray-500 xl:w-64 rounded-xl"
 					type="text"
 					value={searchQuery}
 					onChange={handleChange}
@@ -76,27 +82,29 @@ const SearchGifByName = () => {
 
 				<button
 					type="submit"
-					className="px-5 py-3 border-2 border-gray-700 rounded-xl bg-amber"
+					className="w-48 px-3 py-3 border-2 border-gray-700 rounded-xl bg-amber"
 				>
 					Buscar
 				</button>
 				<button
 					type="button"
-					className="px-5 py-3 border-2 border-gray-700 rounded-xl bg-amber"
+					className="px-2 py-2 border-2 border-gray-700 w-48px-1 xl:px-3 xl:py-3 rounded-xl bg-amber"
 					onClick={() => handleResetResults()}
 				>
 					Limpiar resultados
 				</button>
 			</form>
-			{hasDisplayedResults && (
-				<FetchResults
-					data={data}
-					error={error?.message}
-					isError={isError}
-					isFetching={isFetching}
-				/>
-			)}
-			{hasDisplayedResults && (
+			{hasDisplayedResults ||
+				(isStale && (
+					<FetchResults
+						data={data}
+						error={error?.message}
+						isStale={isStale}
+						isError={isError}
+						isFetching={isFetching}
+					/>
+				))}
+			{hasDisplayedResults && !isFetching && (
 				<button
 					className="px-5 py-3 border-2 rounded-lg cursor-default border-emerald-500"
 					onClick={() => handlePagination()}
