@@ -6,9 +6,9 @@ interface Props {
 }
 export const GifList: FC<Props> = ({ gifs }) => {
 	return (
-		<section className="grid xl:grid-cols-3 grid-cols-1 xl:gap-6 gap-3 container mx-auto mt-6">
+		<section className="container grid grid-cols-1 gap-3 p-3 mx-auto mt-6 xl:grid-cols-4 xl:gap-6">
 			{gifs.map((gif) => (
-				<GifItem gif={gif} key={gif.id} />
+				<GifItem gif={gif} key={gif.embed_url} />
 			))}
 		</section>
 	)
