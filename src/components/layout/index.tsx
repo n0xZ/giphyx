@@ -9,9 +9,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
 	const { pathname } = useRouter()
 	return (
 		<>
-			<header className="p-5 border-b-2 border-gray-200">
-				<nav className="flex flex-row items-center justify-center container mx-auto">
-					<ul className="flex flex-row items-center space-x-9 font-bold">
+			<header className="p-5 border-b-2 border-zinc-900">
+				<nav className="container flex flex-row items-center justify-center mx-auto">
+					<ul className="flex flex-row items-center font-bold space-x-9">
 						<li>
 							<Link href="/">Home</Link>
 						</li>
