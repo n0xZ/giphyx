@@ -58,10 +58,25 @@ const EmptyFavouriteGIFS = () => {
 
 const FavouriteGifs: NextPage = () => {
 	const { data: session } = useSession()
-	if (!session) return <ProtectedContent />
+	if (!session)
+		return (
+			<>
+				<Head>
+					<title>Giphyx - No puedes ver este contenido</title>
+				</Head>
+				<ProtectedContent />
+			</>
+		)
 
 	if (localStorage.getItem('favourite-gifs') === null)
-		return <EmptyFavouriteGIFS />
+		return (
+			<>
+				<Head>
+					<title>Giphyx - Al parecer no tienes GIFS Favoritos</title>
+				</Head>
+				<EmptyFavouriteGIFS />
+			</>
+		)
 	const selectedGIFS = JSON.parse(
 		String(localStorage.getItem('favourite-gifs'))
 	) as GIF[]
