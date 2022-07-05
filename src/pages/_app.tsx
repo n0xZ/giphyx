@@ -1,4 +1,5 @@
 import { withTRPC } from '@trpc/next'
+import { SessionProvider } from 'next-auth/react'
 import { AnimatePresence } from 'framer-motion'
 import superjson from 'superjson'
 import { Toaster } from 'react-hot-toast'
@@ -8,10 +9,12 @@ import '../styles/app.css'
 const MyApp: AppType = ({ Component, pageProps }) => {
 	return (
 		<>
-			<AnimatePresence exitBeforeEnter>
-				<Component {...pageProps} />
-			</AnimatePresence>
-			<Toaster position="top-right" />
+			<SessionProvider session={pageProps.session}>
+				<AnimatePresence exitBeforeEnter>
+					<Component {...pageProps} />
+					<Toaster position="top-right" />
+				</AnimatePresence>
+			</SessionProvider>
 		</>
 	)
 }
