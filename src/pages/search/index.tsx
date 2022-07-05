@@ -9,18 +9,26 @@ import CategoriesSearchAsset from '~/public/search-category.svg'
 import NameSearchAsset from '~/public/search-name.svg'
 const SearchPage: NextPage = () => {
 	const { data: session } = useSession()
-	if (!session) return <ProtectedContent />
+	if (!session)
+		return (
+			<>
+				<Head>
+					<title>Giphyx - No puedes ver este contenido</title>
+				</Head>
+				<ProtectedContent />
+			</>
+		)
 	return (
 		<MainLayout>
 			<Head>
 				<title>Giphyx - Buscar gifs</title>
 			</Head>{' '}
-			<h2 className="mt-6 text-2xl font-bold text-center">
+			<h2 className="mt-6 text-lg font-bold text-center xl:text-2xl">
 				Bienvenido, {session.user?.name}. Cómo desea realizar la busqueda de
 				GIFS?
 			</h2>
-			<section className="container flex flex-col items-center justify-center h-screen grid-cols-2 mx-auto space-y-5 xl:space-x-5 xl:space-y-0 xl:flex-row xl:justify-center ">
-				<article className="grid gap-3 p-2 duration-100 ease-in border-2 border-black place-items-center hover:-translate-y-1 rounded-xl hover:border-zinc-900">
+			<section className="container flex flex-col items-center justify-center h-screen grid-cols-2 mx-auto space-y-8 xl:space-x-5 xl:space-y-0 xl:flex-row xl:justify-center ">
+				<article className="grid gap-3 p-2 duration-100 ease-in border-2 border-black place-items-center hover:-translate-y-1 rounded-xl hover:border-purple-800">
 					<Image
 						className="w-3/4 "
 						src={CategoriesSearchAsset.src}
@@ -38,7 +46,7 @@ const SearchPage: NextPage = () => {
 					</button>
 				</article>
 
-				<article className="grid gap-3 p-3 duration-100 ease-in border-2 border-black place-items-center hover:-translate-y-1 rounded-xl hover:border-zinc-900">
+				<article className="grid gap-3 p-3 duration-100 ease-in border-2 border-black place-items-center hover:-translate-y-1 rounded-xl hover:border-[#7928ca]">
 					<Image
 						className="w-3/4 dark:bg-black rounded-xl"
 						src={NameSearchAsset.src}
