@@ -18,6 +18,9 @@ export const MainLayout: FC<Props> = ({ children }) => {
 						<li>
 							<Link href="/search">Buscar GIFS</Link>
 						</li>
+						<li>
+							<Link href="/favourite-gifs">Mis GIFS favoritos</Link>
+						</li>
 					</ul>
 				</nav>
 			</header>
