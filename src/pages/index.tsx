@@ -1,12 +1,23 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/future/image'
+import HomeImage from '~/public/home-image.png'
 
 const Home = () => {
 	return (
-		<main className="container grid min-h-screen grid-cols-2 mx-auto place-items-center">
+		<main className="container grid min-h-screen grid-cols-1 mx-auto xl:grid-cols-2 place-items-center">
 			<Head>
 				<title>Bienvenido a Giphyx!</title>
-			</Head>
+			</Head>{' '}
+			<section className="grid place-items-center">
+				<Image
+					className="w-3/4 rounded-xl bg-gradient-to-r p-[2px] from-[#7928ca] to-[#ff0080] "
+					src={HomeImage.src}
+					width={HomeImage.width}
+					priority={true}
+					height={HomeImage.height}
+				/>
+			</section>
 			<section className="flex flex-col items-center space-y-5">
 				<h1 className="text-5xl tracking-wide text-center ">
 					Busque sus{' '}
@@ -16,12 +27,11 @@ const Home = () => {
 					y guardelos.
 				</h1>
 				<Link href="/search">
-					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080]  rounded-xl">
-						<aside className="p-10 bg-black hover:bg-slate-600 rounded-xl">Comenzar ya</aside>
+					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080] hover:opacity-80 rounded-xl">
+						<aside className="p-5 bg-zinc-900 rounded-xl">Comenzar ya</aside>
 					</button>
 				</Link>
 			</section>
-			<section></section>
 		</main>
 	)
 }
