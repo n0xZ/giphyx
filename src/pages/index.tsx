@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/future/image'
-import HomeImage from '~/public/home-image.png'
+import HomeImage from '~/public/home.png'
 
 const Home = () => {
 	return (
@@ -26,9 +26,9 @@ const Home = () => {
 					</span>{' '}
 					y guardelos.
 				</h1>
-				<Link href="/search">
+				<Link href="/sign-in">
 					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080] hover:opacity-80 rounded-xl">
-						<aside className="p-5 bg-zinc-900 rounded-xl">Comenzar ya</aside>
+						<aside className="p-5 bg-black rounded-xl">Comenzar ya</aside>
 					</button>
 				</Link>
 			</section>
