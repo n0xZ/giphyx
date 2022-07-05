@@ -12,7 +12,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
 	return (
 		<>
 			<header className="p-5 border-b-2 border-zinc-900">
-				<nav className="container flex flex-row items-center justify-between max-w-5xl mx-auto">
+				<nav className="container flex flex-row items-center justify-between max-w-5xl mx-auto ">
 					<Link href="/">
 						<Icon
 							icon="simple-icons:giphy"
@@ -20,7 +20,7 @@ export const MainLayout: FC<Props> = ({ children }) => {
 						/>
 					</Link>
 
-					<ul className="flex flex-row items-center font-bold space-x-9">
+					<ul className="flex flex-row items-center font-bold space-x-9 xl:hidden">
 						<li
 							className={`${
 								pathname === '/search' ? 'link text-[#7928ca]' : 'link'
@@ -44,6 +44,43 @@ export const MainLayout: FC<Props> = ({ children }) => {
 							</button>
 						</li>
 					</ul>
+					<div className="drawer drawer-mobile">
+						<input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+						<div className="flex flex-col items-center justify-center drawer-content">
+							<label className="btn btn-black drawer-button lg:hidden">
+								Opciones
+							</label>
+						</div>
+						<div className="drawer-side">
+							<label className="drawer-overlay"></label>
+							<ul className="p-4 overflow-y-auto menu w-80 bg-base-100 text-base-content">
+								<li
+									className={`${
+										pathname === '/search' ? 'link text-[#7928ca]' : 'link'
+									}`}
+								>
+									<Link href="/search">Buscar GIFS</Link>
+								</li>
+								<li
+									className={`${
+										pathname === '/favourite-gifs'
+											? 'link text-[#7928ca]'
+											: 'link'
+									}`}
+								>
+									<Link href="/favourite-gifs">Mis GIFS favoritos</Link>
+								</li>
+								<li className="link">
+									<button
+										onClick={() => signOut()}
+										className="px-3 py-3 duration-100 border-2 border-zinc-800 rounded-xl hover:border-zinc-600 opacity-80"
+									>
+										Cerrar sesión
+									</button>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</nav>
 			</header>
 			<motion.main
