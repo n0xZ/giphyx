@@ -21,10 +21,18 @@ export const MainLayout: FC<Props> = ({ children }) => {
 					</Link>
 
 					<ul className="flex flex-row items-center font-bold space-x-9">
-						<li className="link">
+						<li
+							className={`${
+								pathname === '/search' ? 'link text-[#7928ca]' : 'link'
+							}`}
+						>
 							<Link href="/search">Buscar GIFS</Link>
 						</li>
-						<li className="link">
+						<li
+							className={`${
+								pathname === '/favourite-gifs' ? 'link text-[#7928ca]' : 'link'
+							}`}
+						>
 							<Link href="/favourite-gifs">Mis GIFS favoritos</Link>
 						</li>
 						<li className="link">
