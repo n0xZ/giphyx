@@ -23,7 +23,14 @@ const CategoriesPage: NextPage = () => {
 
 	if (isLoading) return <Loading />
 	if (!categories)
-		return <FetchError customError="Hubo un error al cargar las categorías." />
+		return (
+			<>
+				<Head>
+					<title>Giphy - Error</title>
+				</Head>
+				<FetchError customError="Hubo un error al cargar las categorías." />
+			</>
+		)
 
 	return (
 		<MainLayout>
