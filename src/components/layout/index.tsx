@@ -20,7 +20,7 @@ const Sidebar = ({
 		<>
 			{showSidebar ? (
 				<button
-					className="fixed z-50 flex items-center text-4xl text-gray-100 cursor-pointer right-10 top-6"
+					className="fixed z-50 flex items-center text-4xl text-gray-100 cursor-pointer xl:hidden right-10 top-6"
 					onClick={() => handleShowSidebar()}
 				>
 					x
