@@ -1,9 +1,10 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
+import ProtectedContent from '~/components/protected/ProtectedContent'
 import { GIF } from '~/types'
 
 const EmptyFavouriteGIFS = () => {
@@ -17,11 +18,19 @@ const EmptyFavouriteGIFS = () => {
 }
 
 const FavouriteGifs: NextPage = () => {
+	const { data: session } = useSession()
+	if (!session) return <ProtectedContent />
+
+	if (localStorage.getItem('favourite-gifs') === null)
+		return (
+			<MainLayout>
+				<EmptyFavouriteGIFS />
+			</MainLayout>
+		)
 	const selectedGIFS = JSON.parse(
 		String(localStorage.getItem('favourite-gifs'))
 	) as GIF[]
-	if (typeof localStorage.getItem('favourite-gifs') === null)
-		return <EmptyFavouriteGIFS />
+	
 	return (
 		<MainLayout>
 			<Head>

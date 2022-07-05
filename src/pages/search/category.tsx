@@ -6,7 +6,11 @@ import { MainLayout } from '~/components/layout'
 import { Loading } from '~/components/loading/Loading'
 import { FetchError } from '~/components/error/FetchError'
 import { trpc } from '~/utils/trpc'
+import { useSession } from 'next-auth/react'
+import ProtectedContent from '~/components/protected/ProtectedContent'
 const CategoriesPage: NextPage = () => {
+	const { data: session } = useSession()
+	if (!session) return <ProtectedContent />
 	const { data: categories, isLoading } = trpc.useQuery(['cat.getCategories'])
 
 	if (isLoading) return <Loading />

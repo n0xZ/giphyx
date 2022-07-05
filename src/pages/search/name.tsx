@@ -6,6 +6,8 @@ import { Loading } from '~/components/loading/Loading'
 import { trpc } from '~/utils/trpc'
 import { SearchResultsI } from '~/types'
 import Head from 'next/head'
+import { useSession } from 'next-auth/react'
+import ProtectedContent from '~/components/protected/ProtectedContent'
 
 const FetchResults = ({
 	data,
@@ -30,6 +32,9 @@ const SearchGifByName = () => {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [resultPages, setResultPages] = useState(12)
 	const [hasDisplayedResults, setHasDisplayedResults] = useState(false)
+	const { data: session } = useSession()
+
+	if (!session) return <ProtectedContent />
 
 	const { data, isError, isFetching, isStale, refetch, error } = trpc.useQuery(
 		['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
@@ -65,6 +70,7 @@ const SearchGifByName = () => {
 		setHasDisplayedResults(false)
 		setSearchQuery('')
 	}
+
 	return (
 		<MainLayout>
 			<Head>

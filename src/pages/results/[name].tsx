@@ -4,17 +4,20 @@ import {
 	GetStaticPropsContext,
 	InferGetStaticPropsType,
 } from 'next'
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import superjson from 'superjson'
 import { appRouter } from '~/backend/routers/_app'
 import { GifList } from '~/components/gif/GifList'
 import { MainLayout } from '~/components/layout'
+import ProtectedContent from '~/components/protected/ProtectedContent'
 import { Category } from '~/types'
 
 const SearchResults = ({
 	results,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const { data: session } = useSession()
+	if (!session) return <ProtectedContent />
 	return (
 		<MainLayout>
 			<Head>
