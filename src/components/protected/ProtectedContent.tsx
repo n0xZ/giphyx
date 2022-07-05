@@ -12,7 +12,7 @@ const ProtectedContent = () => {
 		}, 1000)
 		return () => clearTimeout(timer)
 	})
-	if (timer === 0) router.push('sign-in')
+	if (timer === 0) router.push('/sign-in')
 	return (
 		<MainLayout>
 			<section className="mt-2">
