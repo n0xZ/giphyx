@@ -1,7 +1,7 @@
 import Image from 'next/future/image'
 import { FC, useState } from 'react'
 import { GIF } from '~/types'
-
+import { toast } from 'react-hot-toast'
 interface Props {
 	gif: GIF
 }
@@ -15,6 +15,7 @@ export const GifItem: FC<Props> = ({ gif }) => {
 			const newFavouriteGifs = [] as GIF[]
 			newFavouriteGifs.push(gif)
 			localStorage.setItem('favourite-gifs', JSON.stringify(newFavouriteGifs))
+			toast.success('GIF agregado con éxito')
 		} else {
 			const favouriteGifs = JSON.parse(
 				String(localStorage.getItem('favourite-gifs'))
@@ -22,6 +23,7 @@ export const GifItem: FC<Props> = ({ gif }) => {
 
 			favouriteGifs.push(gif)
 			localStorage.setItem('favourite-gifs', JSON.stringify(favouriteGifs))
+			toast.success('GIF agregado con éxito')
 		}
 	}
 
