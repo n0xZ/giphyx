@@ -5,6 +5,7 @@ import { MainLayout } from '~/components/layout'
 import { Loading } from '~/components/loading/Loading'
 import { trpc } from '~/utils/trpc'
 import { SearchResultsI } from '~/types'
+import Head from 'next/head'
 
 const FetchResults = ({
 	data,
@@ -30,14 +31,13 @@ const SearchGifByName = () => {
 	const [resultPages, setResultPages] = useState(12)
 	const [hasDisplayedResults, setHasDisplayedResults] = useState(false)
 
-	const { data, isError, isFetching, isStale, refetch, error } =
-		trpc.useQuery(
-			['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
-			{
-				enabled: hasDisplayedResults,
-				refetchOnWindowFocus: false,
-			}
-		)
+	const { data, isError, isFetching, isStale, refetch, error } = trpc.useQuery(
+		['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
+		{
+			enabled: hasDisplayedResults,
+			refetchOnWindowFocus: false,
+		}
+	)
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { target } = e
@@ -53,16 +53,23 @@ const SearchGifByName = () => {
 		setHasDisplayedResults(true)
 		setTimeout(() => setHasDisplayedResults(false), 1500)
 	}
+
+	// 'handlePagination' Will increase the resultPage states for paginating the
 	const handlePagination = () => {
 		setResultPages((prev) => prev + 12)
 		refetch()
 	}
+
+	//'handleResetResults' Cleans the displayed results, and the search query state.
 	const handleResetResults = () => {
 		setHasDisplayedResults(false)
 		setSearchQuery('')
 	}
 	return (
 		<MainLayout>
+			<Head>
+				<title>Giphyx - Buscar por nombre</title>
+			</Head>
 			<h2 className="mt-3 mb-5 text-3xl text-center">
 				{hasDisplayedResults
 					? `Resultados de busqueda: ${searchQuery}`
@@ -82,7 +89,7 @@ const SearchGifByName = () => {
 
 				<button
 					type="submit"
-					className="w-48 px-3 py-3 border-2 border-gray-700 rounded-xl bg-amber"
+					className="w-48 px-3 py-3 border-2 border-gray-700 rounded-xl "
 				>
 					Buscar
 				</button>

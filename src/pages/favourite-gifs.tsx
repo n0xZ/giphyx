@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 import { GifList } from '~/components/gif/GifList'
@@ -22,6 +23,9 @@ const FavouriteGifs: NextPage = () => {
 	if (FavouriteGifs.length === 0) return <EmptyFavouriteGIFS />
 	return (
 		<MainLayout>
+			<Head>
+				<title>Giphyx - Mis GIFS Favoritos</title>
+			</Head>
 			<h2 className="text-center">Mis GIFS Favoritos</h2>
 			<GifList gifs={selectedGIFS} />
 		</MainLayout>
