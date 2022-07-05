@@ -11,17 +11,18 @@ export const GifItem: FC<Props> = ({ gif }) => {
 		setSrc(gif.images.original.url)
 	}
 	const saveGIF = (gif: GIF) => {
-		if (typeof localStorage.getItem('selected-gifs') !== null) {
-			const selectedGifs = JSON.parse(
+		if (localStorage.getItem('favourite-gifs') === null) {
+			const newFavouriteGifs = [] as GIF[]
+			newFavouriteGifs.push(gif)
+			localStorage.setItem('favourite-gifs', JSON.stringify(newFavouriteGifs))
+		} else {
+			const favouriteGifs = JSON.parse(
 				String(localStorage.getItem('favourite-gifs'))
 			) as GIF[]
 
-			selectedGifs.push(gif)
-			localStorage.setItem('selected-gifs', JSON.stringify(selectedGifs))
+			favouriteGifs.push(gif)
+			localStorage.setItem('favourite-gifs', JSON.stringify(favouriteGifs))
 		}
-		const newSelectedGifs = [] as GIF[]
-		newSelectedGifs.push(gif)
-		localStorage.setItem('selected-gifs', JSON.stringify(newSelectedGifs))
 	}
 
 	return (
