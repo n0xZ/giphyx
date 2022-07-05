@@ -3,8 +3,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"~/*": ["src/*"],
+			"~/public/*": ["src/public/*"],
 			"~/components/*": ["src/components/*"],
-				"~/backend/*": ["src/backend/*"],
+			"~/backend/*": ["src/backend/*"],
 			"~/assets/*": ["src/assets/*"],
 			"~/utils/*": ["src/utils/*"],
 			"~/services/*": ["src/services/*"]
