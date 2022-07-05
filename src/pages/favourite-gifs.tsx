@@ -18,9 +18,10 @@ const EmptyFavouriteGIFS = () => {
 
 const FavouriteGifs: NextPage = () => {
 	const selectedGIFS = JSON.parse(
-		String(localStorage.getItem('selected-gifs'))
+		String(localStorage.getItem('favourite-gifs'))
 	) as GIF[]
-	if (FavouriteGifs.length === 0) return <EmptyFavouriteGIFS />
+	if (typeof localStorage.getItem('favourite-gifs') === null)
+		return <EmptyFavouriteGIFS />
 	return (
 		<MainLayout>
 			<Head>
