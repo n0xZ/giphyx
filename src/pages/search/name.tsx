@@ -34,16 +34,6 @@ const SearchGifByName = () => {
 	const [hasDisplayedResults, setHasDisplayedResults] = useState(false)
 	const { data: session } = useSession()
 
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
-
 	const { data, isError, isFetching, isStale, refetch, error } = trpc.useQuery(
 		['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
 		{
@@ -78,7 +68,15 @@ const SearchGifByName = () => {
 		setHasDisplayedResults(false)
 		setSearchQuery('')
 	}
-
+	if (!session)
+		return (
+			<>
+				<Head>
+					<title>Giphyx - No puedes ver este contenido</title>
+				</Head>
+				<ProtectedContent />
+			</>
+		)
 	return (
 		<MainLayout>
 			<Head>
