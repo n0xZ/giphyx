@@ -9,7 +9,7 @@ Giphyx es un sitio web donde puedes visualizar distíntos GIFS de GIPHY, y a su 
 Para poder correr el proyecto debes tipear los siguientes comandos:
 
 ```bash
-$  git clone https://github.com/n0xZ/gixny.git
+$  git clone https://github.com/n0xZ/giphyx.git
 $  cd gixny
 $  pnpm install
 $  pnpm dev
