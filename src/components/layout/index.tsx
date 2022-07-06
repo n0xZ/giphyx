@@ -28,8 +28,8 @@ const Sidebar = ({
 			) : (
 				<svg
 					onClick={() => handleShowSidebar()}
-					className="fixed z-30 flex items-center cursor-pointer right-10 top-6"
-					fill="#2563EB"
+					className="fixed z-30 flex items-center cursor-pointer xl:hidden right-10 top-6"
+					fill="#7928ca"
 					viewBox="0 0 100 80"
 					width="40"
 					height="40"
