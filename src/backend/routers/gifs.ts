@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { createRouter } from '../router'
+
 import { GIF, SearchResultsI } from '~/types'
 const API_KEY = String(process.env.GIPHY_API_KEY)
 const API_URL = String(process.env.GIPHY_API_URL)

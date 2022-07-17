@@ -1,10 +1,12 @@
 {
 	"compilerOptions": {
 		"baseUrl": ".",
+
 		"paths": {
 			"~/*": ["src/*"],
 			"~/public/*": ["src/public/*"],
 			"~/components/*": ["src/components/*"],
+			"~/features/*": ["src/features/*"],
 			"~/backend/*": ["src/backend/*"],
 			"~/assets/*": ["src/assets/*"],
 			"~/utils/*": ["src/utils/*"],
@@ -23,8 +25,17 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
-		"incremental": true
+		"incremental": true,
+		"types": ["cypress", "@types/jest","@testing-library/jest-dom"]
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Field"],
+	"include": [
+		"next-env.d.ts",
+		"jest-dom.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"jest.setup.ts",
+		"jest.config.js",
+		"../node_modules/cypress"
+	],
 	"exclude": ["node_modules"]
 }

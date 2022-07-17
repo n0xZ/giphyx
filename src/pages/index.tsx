@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Image from 'next/future/image'
+import Image from 'next/image'
 import HomeImage from '~/public/home.png'
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
 					y guardelos.
 				</h1>
 				<Link href="/sign-in">
-					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080] hover:opacity-80 rounded-xl">
+					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080] hover:opacity-80 rounded-xl" data-test="signUpButton">
 						<aside className="p-5 bg-black rounded-xl">Comenzar ya</aside>
 					</button>
 				</Link>

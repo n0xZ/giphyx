@@ -33,6 +33,7 @@ const SignIn: NextPage = () => {
 				Para poder acceder a Giphyx, se debe iniciar sesión.
 			</h2>
 			<button
+				data-test="signUpButton"
 				disabled={status === 'loading'}
 				className="flex flex-row items-center px-5 py-5 mb-6 space-x-3 font-bold text-center ease-in border-2 rounded-lg border-zinc-800 hover:opacity-80"
 				onClick={() => signIn('github')}
