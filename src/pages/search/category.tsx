@@ -9,18 +9,8 @@ import { trpc } from '~/utils/trpc'
 import { useSession } from 'next-auth/react'
 import ProtectedContent from '~/components/protected/ProtectedContent'
 const CategoriesPage: NextPage = () => {
-	const { data: session } = useSession()
-
 	const { data: categories, isLoading } = trpc.useQuery(['cat.getCategories'])
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
+
 	if (isLoading) return <Loading />
 	if (!categories)
 		return (

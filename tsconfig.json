@@ -26,16 +26,16 @@
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
-		"types": ["cypress", "@types/jest","@testing-library/jest-dom"]
+		"types": ["cypress", "@types/jest"]
 	},
 	"include": [
 		"next-env.d.ts",
 		"jest-dom.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"jest.setup.ts",
-		"jest.config.js",
+		"./jest.setup.ts",
+		"./jest.config.js",
 		"../node_modules/cypress"
-	],
+, "cypress/support/index.js"	],
 	"exclude": ["node_modules"]
 }

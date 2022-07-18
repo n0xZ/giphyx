@@ -33,6 +33,7 @@ const Sidebar = ({
 					viewBox="0 0 100 80"
 					width="40"
 					height="40"
+					data-test="sidebar"
 				>
 					<rect width="100" height="10"></rect>
 					<rect y="30" width="100" height="10"></rect>
@@ -52,19 +53,12 @@ const Sidebar = ({
 					<Link href="/search">Buscar GIFS</Link>
 				</li>
 				<li
+					data-test="favourite-gifs-nav-item"
 					className={`${
 						pathname === '/favourite-gifs' ? 'link text-[#7928ca]' : 'link'
 					}`}
 				>
 					<Link href="/favourite-gifs">Mis GIFS favoritos</Link>
-				</li>
-				<li className="link">
-					<button
-						onClick={() => signOut()}
-						className="px-3 py-3 duration-100 border-2 border-zinc-800 rounded-xl hover:border-zinc-600 opacity-80"
-					>
-						Cerrar sesión
-					</button>
 				</li>
 			</ul>
 		</>

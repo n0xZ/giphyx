@@ -16,16 +16,6 @@ import { Category } from '~/types'
 const SearchResults = ({
 	results,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const { data: session } = useSession()
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
 	return (
 		<MainLayout>
 			<Head>

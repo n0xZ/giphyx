@@ -13,9 +13,4 @@ describe('Home page', () => {
 			'Busque sus gifs favoritos de Giphy y guardelos.'
 		)
 	})
-	it('Should redirect to Login if ', () => {
-		cy.visit('http://localhost:3000/')
-		cy.get('[data-test="signUpButton"]').click()
-		cy.url().should('include', '/sign-in')
-	})
 })

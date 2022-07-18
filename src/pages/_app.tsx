@@ -9,12 +9,10 @@ import '../styles/app.css'
 const MyApp: AppType = ({ Component, pageProps }) => {
 	return (
 		<>
-			<SessionProvider session={pageProps.session}>
-				<AnimatePresence exitBeforeEnter>
-					<Component {...pageProps} />
-					<Toaster position="top-right" />
-				</AnimatePresence>
-			</SessionProvider>
+			<AnimatePresence exitBeforeEnter>
+				<Component {...pageProps} />
+				<Toaster position="top-right" />
+			</AnimatePresence>
 		</>
 	)
 }

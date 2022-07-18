@@ -11,8 +11,8 @@ const CategoryItem: FC<Props> = ({ category }) => {
 		setSrc(category.gif.images.original.url)
 	}
 	return (
-		<Link href={`/results/${category.name_encoded}`}>
-			<article className="flex flex-col justify-center w-full shadow-xl rounded-xl hover:opacity-80">
+		<Link href={`/results/${category.name_encoded}`} >
+			<article className="flex flex-col justify-center w-full shadow-xl rounded-xl hover:opacity-80" data-test={`category ${category.name}`}>
 				<h3 className="text-2xl font-bold text-center">{category.name}</h3>
 				<Image
 					src={src}

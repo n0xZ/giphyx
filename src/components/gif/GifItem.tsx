@@ -44,7 +44,7 @@ export const GifItem: FC<Props> = ({ gif }) => {
 				onClick={() => saveGIF(gif)}
 				
 			>
-				<aside className="px-[1px] py-[1px] bg-black rounded-xl"> ❤</aside>
+				<aside className="px-[1px] py-[1px] bg-black rounded-xl" data-test={`add ${gif.title}`}> ❤</aside>
 			</button>
 		</article>
 	)

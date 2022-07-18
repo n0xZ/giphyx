@@ -20,8 +20,8 @@ const ctx = konn().beforeEach(() => {
 describe('Category List test case', () => {
 	it('Renders the component with default content', async () => {
 
+const app = render(<CategoryList categories={[]}/>)
 
-
-		
+		expect(app.container).toBeInTheDocument()
 	})
 })

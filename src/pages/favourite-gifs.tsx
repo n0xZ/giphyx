@@ -9,6 +9,7 @@ import ProtectedContent from '~/components/protected/ProtectedContent'
 import CategoriesSearchAsset from '~/public/search-category.svg'
 import NameSearchAsset from '~/public/search-name.svg'
 import { GIF } from '~/types'
+import { useEffect, useState } from 'react'
 
 const EmptyFavouriteGIFS = () => {
 	return (
@@ -57,18 +58,18 @@ const EmptyFavouriteGIFS = () => {
 }
 
 const FavouriteGifs: NextPage = () => {
-	const { data: session } = useSession()
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
-
-	if (localStorage.getItem('favourite-gifs') === null)
+	const [favouriteGifs, setFavouriteGifs] = useState<GIF[]>([])
+	const fetchFavouriteGifs = () => {
+		const selectedGIFS = JSON.parse(
+			String(localStorage.getItem('favourite-gifs'))
+		) as GIF[]
+		setFavouriteGifs(selectedGIFS)
+	}
+	console.log(favouriteGifs)
+	useEffect(() => {
+		fetchFavouriteGifs()
+	}, [])
+	if (favouriteGifs === null || favouriteGifs.length === 0)
 		return (
 			<>
 				<Head>
@@ -77,9 +78,6 @@ const FavouriteGifs: NextPage = () => {
 				<EmptyFavouriteGIFS />
 			</>
 		)
-	const selectedGIFS = JSON.parse(
-		String(localStorage.getItem('favourite-gifs'))
-	) as GIF[]
 
 	return (
 		<MainLayout>
@@ -89,7 +87,7 @@ const FavouriteGifs: NextPage = () => {
 			<h2 className="mt-6 text-lg font-bold text-center xl:text-2xl">
 				Mis GIFS Favoritos
 			</h2>
-			<GifList gifs={selectedGIFS} />
+			<GifList gifs={favouriteGifs} />
 		</MainLayout>
 	)
 }

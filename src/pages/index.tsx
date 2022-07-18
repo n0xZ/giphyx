@@ -26,7 +26,7 @@ const Home = () => {
 					</span>{' '}
 					y guardelos.
 				</h1>
-				<Link href="/sign-in">
+				<Link href="/search">
 					<button className="p-[2px] bg-gradient-to-r from-[#7928ca] to-[#ff0080] hover:opacity-80 rounded-xl" data-test="signUpButton">
 						<aside className="p-5 bg-black rounded-xl">Comenzar ya</aside>
 					</button>

@@ -25,14 +25,14 @@ const FetchResults = ({
 	if (isFetching) return <Loading />
 	if (isError) return <FetchError error={error!} />
 	if (!data?.data && isStale) return null
-	return <GifList gifs={data?.data!} />
+	return <GifList  gifs={data?.data!} />
 }
 
 const SearchGifByName = () => {
 	const [searchQuery, setSearchQuery] = useState('')
 	const [resultPages, setResultPages] = useState(12)
 	const [hasDisplayedResults, setHasDisplayedResults] = useState(false)
-	const { data: session } = useSession()
+
 
 	const { data, isError, isFetching, isStale, refetch, error } = trpc.useQuery(
 		['gifs.getPaginatedGIFS', { query: searchQuery, limit: resultPages }],
@@ -68,15 +68,7 @@ const SearchGifByName = () => {
 		setHasDisplayedResults(false)
 		setSearchQuery('')
 	}
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
+
 	return (
 		<MainLayout>
 			<Head>
@@ -92,20 +84,24 @@ const SearchGifByName = () => {
 				className="flex flex-col items-center justify-center p-3 space-x-5 space-y-3 xl:space-y-0 xl:flex-row"
 			>
 				<input
+				data-test="search-input"
 					placeholder="Por ej... Anime"
 					className="w-48 px-2 py-2 text-gray-100 bg-transparent border-2 border-gray-500 xl:w-64 rounded-xl"
 					type="text"
+					name="searchQuery"
 					value={searchQuery}
 					onChange={handleChange}
 				/>
 
 				<button
+				name="submitSearch"
 					type="submit"
 					className="w-48 px-3 py-3 border-2 border-gray-700 rounded-xl "
 				>
 					Buscar
 				</button>
 				<button
+				name="clearSearch"
 					type="button"
 					className="px-2 py-2 border-2 border-gray-700 w-48px-1 xl:px-3 xl:py-3 rounded-xl bg-amber"
 					onClick={() => handleResetResults()}

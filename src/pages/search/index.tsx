@@ -8,24 +8,13 @@ import ProtectedContent from '~/components/protected/ProtectedContent'
 import CategoriesSearchAsset from '~/public/search-category.svg'
 import NameSearchAsset from '~/public/search-name.svg'
 const SearchPage: NextPage = () => {
-	const { data: session } = useSession()
-	if (!session)
-		return (
-			<>
-				<Head>
-					<title>Giphyx - No puedes ver este contenido</title>
-				</Head>
-				<ProtectedContent />
-			</>
-		)
 	return (
 		<MainLayout>
 			<Head>
 				<title>Giphyx - Buscar gifs</title>
 			</Head>{' '}
 			<h2 className="mt-6 text-lg font-bold text-center xl:text-2xl">
-				Bienvenido, {session.user?.name}. Cómo desea realizar la busqueda de
-				GIFS?
+				Bienvenido, Usuario. Cómo desea realizar la busqueda de GIFS?
 			</h2>
 			<section className="container flex flex-col items-center justify-center h-screen grid-cols-2 mx-auto space-y-8 xl:space-x-5 xl:space-y-0 xl:flex-row xl:justify-center ">
 				<article className="grid gap-3 p-2 duration-100 ease-in border-2 border-black place-items-center hover:-translate-y-1 rounded-xl hover:border-purple-800">

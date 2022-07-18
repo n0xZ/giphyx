@@ -9,7 +9,7 @@ const ProtectedContent = () => {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setTimer((prev) => prev - 1)
-		}, 1000)
+		}, 700)
 		return () => clearTimeout(timer)
 	})
 	if (timer === 0) router.push('/sign-in')
