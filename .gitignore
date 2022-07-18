@@ -12,7 +12,7 @@
 
 # production
 /build
-
+/cypress/
 # misc
 .DS_Store
 *.pem
